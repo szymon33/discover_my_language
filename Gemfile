@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'rspec', '~>3.0'
+gem "httparty"
 gem 'rake'
+gem 'rspec', '~>3.0'
