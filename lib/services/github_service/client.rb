@@ -6,6 +6,10 @@ module GithubService
   class Client
     include HTTParty
 
-    base_uri 'api.github.com'
+    base_uri 'https://api.github.com'
+
+    def initialize
+      @options = {}
+    end
   end
 end
