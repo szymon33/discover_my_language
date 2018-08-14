@@ -14,5 +14,17 @@ module GithubService
         nil
       end
     end
+
+    def list_languages(owner, repo)
+      # Lists languages for the specified repository. The value shown for
+      # each language is the number of bytes of code written in that language.
+      url = "/repos/#{owner}/#{repo}/languages"
+      begin
+        response = self.class.get(url)
+        response&.success? ? JSON.parse(response.body) : nil
+      rescue StandardError
+        nil
+      end
+    end
   end
 end
