@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'httparty'
 
 module GithubService
@@ -5,9 +7,5 @@ module GithubService
     include HTTParty
 
     base_uri 'api.github.com'
-
-    def playground
-      'test'
-    end
   end
 end
