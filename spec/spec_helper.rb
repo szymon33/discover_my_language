@@ -18,6 +18,8 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'simplecov'
+require 'vcr'
+
 SimpleCov.start
 
 RSpec.configure do |config|
@@ -104,4 +106,11 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+end
+
+VCR.configure do |c|
+  c.hook_into :webmock
+  c.configure_rspec_metadata!
+  c.ignore_localhost     = true
+  c.cassette_library_dir = "spec/fixtures/http"
 end
