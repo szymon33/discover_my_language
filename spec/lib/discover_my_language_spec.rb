@@ -4,7 +4,9 @@ require 'spec_helper'
 require 'discover_my_language'
 
 describe DiscoverMyLanguage do
-  it 'is test' do
-    expect(described_class.new.playground).to eq 'hello world'
+  let(:user_name) { 'szymon33' }
+
+  it 'it is success' do
+    expect(described_class.new(user_name).build).to eq "szymon33 favourite programming language is Ruby"
   end
 end
