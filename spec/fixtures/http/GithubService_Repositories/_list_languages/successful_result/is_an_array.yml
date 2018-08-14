@@ -1,0 +1,75 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.github.com/repos/szymon33/discover_my_language/languages
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Authorization:
+      - Basic c3p5bW9uMzM6UDRrOUtKaGlvQ2RZa20=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - GitHub.com
+      Date:
+      - Tue, 14 Aug 2018 15:37:19 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '14'
+      Status:
+      - 200 OK
+      X-Ratelimit-Limit:
+      - '5000'
+      X-Ratelimit-Remaining:
+      - '4835'
+      X-Ratelimit-Reset:
+      - '1534261898'
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      Etag:
+      - '"9a8f1a4f57e98941e4911bc7b65fe02e"'
+      Last-Modified:
+      - Tue, 14 Aug 2018 15:27:21 GMT
+      X-Github-Media-Type:
+      - github.v3; format=json
+      Access-Control-Expose-Headers:
+      - ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      X-Frame-Options:
+      - deny
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Content-Security-Policy:
+      - default-src 'none'
+      X-Runtime-Rack:
+      - '0.054952'
+      X-Github-Request-Id:
+      - E88B:70AF:750C82:FA379A:5B72F72E
+    body:
+      encoding: UTF-8
+      string: '{"Ruby":10435}'
+    http_version: 
+  recorded_at: Tue, 14 Aug 2018 15:37:19 GMT
+recorded_with: VCR 4.0.0

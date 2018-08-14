@@ -16,7 +16,7 @@ describe GithubService::Repositories do
       subject.list_user_repositories('La La Land')
     end
 
-    describe 'successful result' do
+    describe 'successful result', vcr: true do
       subject { described_class.new.list_user_repositories(user_name) }
 
       it 'is an array' do
@@ -41,7 +41,7 @@ describe GithubService::Repositories do
     end
   end
 
-  describe '.list_languages' do
+  describe '.list_languages', vcr: true do
     let(:owner) { 'szymon33' }
     let(:repo) { 'discover_my_language' }
 
