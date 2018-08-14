@@ -8,7 +8,7 @@ module GithubService
       return unless user_name
       url = "/users/#{user_name}/repos"
       begin
-        response = self.class.get(url)
+        response = self.class.get(url, @options)
         response&.success? ? JSON.parse(response.body) : nil
       rescue StandardError
         nil
@@ -20,7 +20,7 @@ module GithubService
       # each language is the number of bytes of code written in that language.
       url = "/repos/#{owner}/#{repo}/languages"
       begin
-        response = self.class.get(url)
+        response = self.class.get(url, @options)
         response&.success? ? JSON.parse(response.body) : nil
       rescue StandardError
         nil
