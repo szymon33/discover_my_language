@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'services/github_service/client'
+require_relative 'client'
 
 module GithubService
   class Repositories < Client

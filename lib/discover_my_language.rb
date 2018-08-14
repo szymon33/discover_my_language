@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'services/github_service/repositories'
+require_relative 'services/github_service/repositories'
 
 class DiscoverMyLanguage
   def initialize(user_name)
