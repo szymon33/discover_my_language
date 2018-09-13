@@ -10,7 +10,7 @@ class DiscoverMyLanguage
   end
 
   def build
-    return 'please enter a usernmame' if  @user_name.empty?
+    return 'please enter a usernmame' if @user_name.empty?
 
     fetch_list_of_repositories
     case true
@@ -20,7 +20,7 @@ class DiscoverMyLanguage
       "No data about the user #{@user_name}"
     else
       "#{@user_name} favourite programming language is #{favourite_lang(evalutate_language)}"
-    end    
+    end
   rescue ArgumentError
     'username not found'
   end
@@ -40,7 +40,6 @@ class DiscoverMyLanguage
       .new.list_languages(@user_name, repo['name']) || []
   end
 
-
   def calculate_bytes(langs, results)
     langs.each do |lang, bytes|
       results[lang] += bytes
@@ -49,7 +48,7 @@ class DiscoverMyLanguage
 
   def fetch_list_of_repositories
     @repositories = GithubService::Repositories
-                      .new.list_user_repositories(@user_name)
+                    .new.list_user_repositories(@user_name)
   end
 
   def favourite_lang(hash)

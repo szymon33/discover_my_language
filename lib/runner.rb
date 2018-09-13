@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'discover_my_language'
 
 puts 'Type Github username and press enter:'

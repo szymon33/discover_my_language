@@ -5,13 +5,11 @@ require_relative 'client'
 module GithubService
   class Repositories < Client
     def list_user_repositories(user_name)
-      return unless user_name
       url = "/users/#{user_name}/repos"
       begin
         response = self.class.get(url, @options)
       rescue StandardError
-        # raise StandardError.new('Unexpected standard error')
-        return nil
+        raise StandardError, 'Unexpected standard error'
       end
       response&.success? ? JSON.parse(response.body) : handle_error(response)
     end
@@ -31,11 +29,12 @@ module GithubService
     private
 
     def handle_error(response)
+      raise 'Problem with connection' if response.nil?
       case response.code
       when 404
-        raise ArgumentError.new('username not found')
+        raise ArgumentError, 'username not found'
       else
-        raise RuntimeError.new('Unexpected error')
+        raise 'Unexpected error'
       end
     end
   end

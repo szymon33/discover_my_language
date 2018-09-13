@@ -7,12 +7,9 @@ describe GithubService::Repositories do
   describe '.list_user_repositories' do
     let(:user_name) { 'szymon33' }
 
-    it 'is nil with nil user name' do
-      expect(subject.list_user_repositories(nil)).to eq nil
-    end
-
     it 'calls get method' do
       expect(described_class).to receive(:get)
+      allow_any_instance_of(described_class).to receive(:handle_error).and_return(nil)
       subject.list_user_repositories('La La Land')
     end
 
@@ -31,13 +28,11 @@ describe GithubService::Repositories do
       end
     end
 
-    describe 'failing result' do
-      subject do
+    it 'failing result' do
+      expect {
         described_class.new
                        .list_user_repositories('Enough is enough!')
-      end
-
-      it { is_expected.to be nil }
+      }.to raise_error(StandardError)
     end
   end
 
