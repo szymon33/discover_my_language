@@ -9,10 +9,11 @@ module GithubService
       url = "/users/#{user_name}/repos"
       begin
         response = self.class.get(url, @options)
-        response&.success? ? JSON.parse(response.body) : nil
       rescue StandardError
-        nil
+        # raise StandardError.new('Unexpected standard error')
+        return nil
       end
+      response&.success? ? JSON.parse(response.body) : handle_error(response)
     end
 
     def list_languages(owner, repo)
@@ -24,6 +25,17 @@ module GithubService
         response&.success? ? JSON.parse(response.body) : nil
       rescue StandardError
         nil
+      end
+    end
+
+    private
+
+    def handle_error(response)
+      case response.code
+      when 404
+        raise ArgumentError.new('username not found')
+      else
+        raise RuntimeError.new('Unexpected error')
       end
     end
   end
