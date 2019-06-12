@@ -7,3 +7,6 @@ script:
 - bundle exec rspec spec -f doc
 matrix:
   fast_finish: true
+addons:
+  code_climate:
+    repo_token: 557e0a761b92ec6b503cbf459ef732d511418bf96b3dd7c6d084ffc7edabcd50
