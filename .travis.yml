@@ -1,10 +1,10 @@
 language: ruby
 rvm:
- - 2.3.2
+  - 2.3
 sudo: false
 install: bundle install
 script:
-- bundle exec rspec spec -f doc
+  - bundle exec rspec spec -f doc
 matrix:
   fast_finish: true
 addons:
