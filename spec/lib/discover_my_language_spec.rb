@@ -34,5 +34,14 @@ describe DiscoverMyLanguage do
           .to eq 'username not found'
       end
     end
+
+    context 'user name has no public repositories', vcr: true do
+      let(:user_name) { 'fonixphil' }
+
+      it "return error message 'usernmame not found' " do
+        expect(subject)
+          .to eq 'No data about the user fonixphil'
+      end
+    end
   end
 end

@@ -6,28 +6,25 @@ class DiscoverMyLanguage
   def initialize(user_name)
     @user_name = user_name
     @repositories = []
-    @favourite_lang = nil
   end
 
   def build
     return 'please enter a usernmame' if @user_name.empty?
 
-    fetch_list_of_repositories
-    case true
-    when @repositories.nil?
-      'Error connecting GitHub'
+    @repositories, errors = fetch_list_of_repositories
+    case
+    when errors.any?
+      errors.join(',')
     when @repositories.empty?
       "No data about the user #{@user_name}"
     else
-      "#{@user_name} favourite programming language is #{favourite_lang(evalutate_language)}"
+      "#{ @user_name } favourite programming language is #{ find_favourite_lang }"
     end
-  rescue ArgumentError
-    'username not found'
   end
 
   private
 
-  def evalutate_language
+  def evaluate_languages
     @repositories.each_with_object(Hash.new(0)) do |repo, results|
       calculate_bytes(languages_from_github(repo), results)
     end
@@ -37,7 +34,7 @@ class DiscoverMyLanguage
 
   def languages_from_github(repo)
     GithubService::Repositories
-      .new.list_languages(@user_name, repo['name']) || []
+      .new.list_languages(@user_name, repo[:name]) || []
   end
 
   def calculate_bytes(langs, results)
@@ -47,11 +44,12 @@ class DiscoverMyLanguage
   end
 
   def fetch_list_of_repositories
-    @repositories = GithubService::Repositories
-                    .new.list_user_repositories(@user_name)
+    client = GithubService::Repositories.new
+    list = client.list_user_repositories(@user_name)
+    [list, client.errors]
   end
 
-  def favourite_lang(hash)
-    hash.max_by { |_k, v| v }.first
+  def find_favourite_lang
+    evaluate_languages.max_by { |_k, v| v }.first
   end
 end
