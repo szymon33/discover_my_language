@@ -4,7 +4,7 @@ require 'httparty'
 
 module GithubService
   class Client
-  	attr_reader :errors
+    attr_reader :errors
 
     include HTTParty
 
@@ -34,14 +34,16 @@ module GithubService
     def handle_error(response)
       @errors = if response.nil?
                   ["Problem with connection"]
-                elsif response.success? && response.code == 200
-                  []
-                elsif response.code == 404
-                	['username not found']
-                elsif response.body && !response.success?
-                  json = JSON.parse(response.body, symbolize_names: true)
-                  json.fetch(:errors, json)
-                elsif !response.success?
+                elsif response.success?
+                  if response.code == 200
+                    []
+                  elsif response.code == 404
+                    ['username not found']
+                  elsif response.body
+                    json = JSON.parse(response.body, symbolize_names: true)
+                    json.fetch(:errors, json)
+                  end
+                else
                   ["#{ response }"]
                 end
     end

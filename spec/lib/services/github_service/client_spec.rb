@@ -31,7 +31,7 @@ describe GithubService::Client do
 
   describe '.handle_error' do
     it 'is response body' do
-      response = double(:response, code: 200, success?: false, body: { a: :b }.to_json )
+      response = double(:response, code: 401, success?: true, body: { a: :b }.to_json )
       msg = described_class.new.send(:handle_error, response)
       expect(msg).to eq({ a: 'b' })
     end
