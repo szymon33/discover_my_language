@@ -31,7 +31,7 @@ describe DiscoverMyLanguage do
 
       it "return error message 'usernmame not found' " do
         expect(subject)
-          .to eq 'username not found'
+          .to eq 'Error: Not Found'
       end
     end
 

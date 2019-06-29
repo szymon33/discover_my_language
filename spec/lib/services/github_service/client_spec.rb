@@ -36,8 +36,8 @@ describe GithubService::Client do
       expect(msg).to eq({ a: 'b' })
     end
 
-    it 'is response' do
-      response = double(:response, code: 200, success?: false, body: nil )
+    it 'is response itself' do
+      response = double(:response, code: 200, success?: false, message: nil, body: nil )
       msg = described_class.new.send(:handle_error, response)
       expect(msg).to eq ["#{ response }"]
     end

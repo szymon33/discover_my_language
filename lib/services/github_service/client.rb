@@ -43,6 +43,8 @@ module GithubService
                     json = JSON.parse(response.body, symbolize_names: true)
                     json.fetch(:errors, json)
                   end
+                elsif response.message
+                  ["Error: #{ response.message }"]
                 else
                   ["#{ response }"]
                 end
