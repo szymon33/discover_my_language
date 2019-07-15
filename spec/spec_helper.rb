@@ -19,6 +19,8 @@
 
 require 'simplecov'
 require 'vcr'
+require 'coveralls'
+Coveralls.wear!
 
 SimpleCov.start
 
