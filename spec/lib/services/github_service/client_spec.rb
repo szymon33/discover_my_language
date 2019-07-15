@@ -25,21 +25,27 @@ describe GithubService::Client do
     subject { described_class.new.send(:call_wrapper) { request } }
 
     it 'is something' do
-      expect(subject).to eq({ a: 'b' })
+      expect(subject).to eq(a: 'b')
     end
   end
 
   describe '.handle_error' do
     it 'is response body' do
-      response = double(:response, code: 401, success?: true, body: { a: :b }.to_json )
+      response = double(:response, code: 401, success?: true, body: { a: :b }.to_json)
       msg = described_class.new.send(:handle_error, response)
-      expect(msg).to eq({ a: 'b' })
+      expect(msg).to eq(a: 'b')
     end
 
     it 'is response itself' do
-      response = double(:response, code: 200, success?: false, message: nil, body: nil )
+      response = double(:response, code: 200, success?: false, message: nil, body: nil)
       msg = described_class.new.send(:handle_error, response)
-      expect(msg).to eq ["#{ response }"]
+      expect(msg).to eq [response.to_s]
+    end
+
+    it "is response 'user not found'" do
+      response = double(:response, code: 404, success?: true, message: nil, body: nil)
+      msg = described_class.new.send(:handle_error, response)
+      expect(msg).to eq ['username not found']
     end
   end
 end
